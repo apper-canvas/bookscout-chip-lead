@@ -1,0 +1,44 @@
+[
+  {
+    "id": "a1",
+    "userId": "u1",
+    "bookId": "1",
+    "targetPrice": 12.00,
+    "notifyEmail": true,
+    "notifyInApp": true,
+    "createdAt": "2024-01-10T14:20:00Z",
+    "triggered": false
+  },
+  {
+    "id": "a2",
+    "userId": "u1", 
+    "bookId": "4",
+    "targetPrice": 8.00,
+    "notifyEmail": true,
+    "notifyInApp": false,
+    "createdAt": "2024-01-12T09:30:00Z",
+    "triggered": true,
+    "triggeredAt": "2024-01-14T16:45:00Z"
+  },
+  {
+    "id": "a3",
+    "userId": "u1",
+    "bookId": "6",
+    "targetPrice": 12.99,
+    "notifyEmail": false,
+    "notifyInApp": true,
+    "createdAt": "2024-01-08T11:15:00Z",
+    "triggered": false
+  },
+  {
+    "id": "a4",
+    "userId": "u1",
+    "bookId": "2",
+    "targetPrice": 10.00,
+    "notifyEmail": true,
+    "notifyInApp": true,
+    "createdAt": "2024-01-05T16:45:00Z",
+    "triggered": true,
+    "triggeredAt": "2024-01-13T12:30:00Z"
+  }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "id": "p1",
+    "bookId": "1",
+    "retailer": "Amazon",
+    "price": 14.99,
+    "url": "https://amazon.com/midnight-library",
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p2", 
+    "bookId": "1",
+    "retailer": "Barnes & Noble",
+    "price": 16.49,
+    "url": "https://barnesandnoble.com/midnight-library",
+    "lastUpdated": "2024-01-15T09:15:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p3",
+    "bookId": "1", 
+    "retailer": "Book Depository",
+    "price": 13.85,
+    "url": "https://bookdepository.com/midnight-library",
+    "lastUpdated": "2024-01-15T11:45:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p4",
+    "bookId": "2",
+    "retailer": "Amazon", 
+    "price": 11.98,
+    "url": "https://amazon.com/atomic-habits",
+    "lastUpdated": "2024-01-15T10:30:00Z", 
+    "inStock": true
+  },
+  {
+    "id": "p5",
+    "bookId": "2",
+    "retailer": "Barnes & Noble",
+    "price": 13.49,
+    "url": "https://barnesandnoble.com/atomic-habits",
+    "lastUpdated": "2024-01-15T09:15:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p6",
+    "bookId": "2",
+    "retailer": "Target",
+    "price": 12.99,
+    "url": "https://target.com/atomic-habits",
+    "lastUpdated": "2024-01-15T08:00:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p7",
+    "bookId": "3",
+    "retailer": "Amazon",
+    "price": 15.99,
+    "url": "https://amazon.com/seven-husbands-evelyn-hugo",
+    "lastUpdated": "1/15/2024 10:30:00 AMZ",
+    "inStock": true
+  },
+  {
+    "id": "p8",
+    "bookId": "3", 
+    "retailer": "Barnes & Noble",
+    "price": 17.99,
+    "url": "https://barnesandnoble.com/seven-husbands-evelyn-hugo",
+    "lastUpdated": "2024-01-15T09:15:00Z",
+    "inStock": false
+  },
+  {
+    "id": "p9",
+    "bookId": "4",
+    "retailer": "Amazon",
+    "price": 9.99,
+    "url": "https://amazon.com/dune",
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p10",
+    "bookId": "4",
+    "retailer": "Barnes & Noble", 
+    "price": 11.49,
+    "url": "https://barnesandnoble.com/dune",
+    "lastUpdated": "2024-01-15T09:15:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p11",
+    "bookId": "4",
+    "retailer": "Book Depository",
+    "price": 8.95,
+    "url": "https://bookdepository.com/dune", 
+    "lastUpdated": "2024-01-15T11:45:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p12",
+    "bookId": "5",
+    "retailer": "Amazon",
+    "price": 14.49,
+    "url": "https://amazon.com/psychology-money",
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p13",
+    "bookId": "6",
+    "retailer": "Amazon",
+    "price": 13.99,
+    "url": "https://amazon.com/project-hail-mary",
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p14",
+    "bookId": "6",
+    "retailer": "Barnes & Noble",
+    "price": 15.99,
+    "url": "https://barnesandnoble.com/project-hail-mary", 
+    "lastUpdated": "2024-01-15T09:15:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p15",
+    "bookId": "7",
+    "retailer": "Amazon",
+    "price": 12.99,
+    "url": "https://amazon.com/silent-patient",
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p16",
+    "bookId": "8",
+    "retailer": "Amazon", 
+    "price": 16.99,
+    "url": "https://amazon.com/educated",
+    "lastUpdated": "2024-01-15T10:30:00Z",
+    "inStock": true
+  },
+  {
+    "id": "p17",
+    "bookId": "8",
+    "retailer": "Barnes & Noble",
+    "price": 18.49,
+    "url": "https://barnesandnoble.com/educated",
+    "lastUpdated": "2024-01-15T09:15:00Z",
+    "inStock": true
+  }
+]
