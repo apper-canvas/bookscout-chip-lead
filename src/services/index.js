@@ -11,16 +11,3 @@ export {
   priceDataService,
   authService
 };
-export { userService } from './api/userService';
-export { bookService } from './api/bookService';
-export { priceAlertService } from './api/priceAlertService';
-export { priceDataService } from './api/priceDataService';
-export { authService } from './api/authService';
-
-export default {
-  userService,
-  bookService, 
-  priceAlertService,
-  priceDataService,
-  authService
-};
