@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import Layout from '@/Layout';
-import { routes, routeArray } from '@/config/routes';
-import { store } from '@/store';
+import Layout from '@/Layout'
+import { routes, routeArray } from '@/config/routes.jsx'
+import { store } from '@/store'
 
 function App() {
   return (
