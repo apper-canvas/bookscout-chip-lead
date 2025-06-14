@@ -1,6 +1,5 @@
 import { toast } from 'react-toastify';
-import { userService } from './userService';
-
+import userService from './userService';
 // Mock JWT token generation for development
 const generateToken = (user) => {
   return btoa(JSON.stringify({ userId: user.id, exp: Date.now() + 24 * 60 * 60 * 1000 }));
