@@ -6,7 +6,7 @@ import ApperIcon from "@/components/ApperIcon";
 import { routes } from "@/config/routes.jsx";
 import SearchBar from "@/components/molecules/SearchBar";
 import { toast } from "react-toastify";
-import { logout } from "@/store/slices/authSlice";
+import { logout } from "@/store/authSlice";
 
 const Layout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
