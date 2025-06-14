@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Button from '@/components/atoms/Button';
 import Badge from '@/components/atoms/Badge';
 import BookCard from '@/components/molecules/BookCard';
@@ -10,6 +11,7 @@ import { toast } from 'react-toastify';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState('saved');
   const [savedBooks, setSavedBooks] = useState([]);
   const [activeAlerts, setActiveAlerts] = useState([]);
@@ -17,21 +19,29 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [deletingAlert, setDeletingAlert] = useState(null);
 
+  // Redirect if not authenticated
   useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+  }, [isAuthenticated, navigate]);
+useEffect(() => {
     const loadDashboardData = async () => {
+      if (!isAuthenticated || !user) return;
+      
       try {
-        const currentUser = await userService.getCurrentUser();
-        
         // Load saved books
-        const savedBookIds = await userService.getSavedBooks(currentUser.id);
+// Load saved books
+        const savedBookIds = await userService.getSavedBooks(user.id);
         const bookPromises = savedBookIds.map(id => bookService.getById(id));
         const books = await Promise.all(bookPromises);
         setSavedBooks(books);
 
         // Load alerts
         const [active, triggered] = await Promise.all([
-          priceAlertService.getActiveAlerts(currentUser.id),
-          priceAlertService.getTriggeredAlerts(currentUser.id)
+          priceAlertService.getActiveAlerts(user.id),
+          priceAlertService.getTriggeredAlerts(user.id)
         ]);
         
         setActiveAlerts(active);
@@ -44,9 +54,8 @@ const Dashboard = () => {
         setLoading(false);
       }
     };
-
-    loadDashboardData();
-  }, []);
+loadDashboardData();
+  }, [isAuthenticated, user]);
 
   const handleDeleteAlert = async (alertId) => {
     setDeletingAlert(alertId);
@@ -63,10 +72,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleRemoveSavedBook = async (bookId) => {
+const handleRemoveSavedBook = async (bookId) => {
     try {
-      const currentUser = await userService.getCurrentUser();
-      await userService.removeSavedBook(currentUser.id, bookId);
+      await userService.removeSavedBook(user.id, bookId);
       setSavedBooks(prev => prev.filter(book => book.id !== bookId));
       toast.success('Book removed from saved books');
     } catch (error) {

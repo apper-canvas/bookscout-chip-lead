@@ -1,4 +1,19 @@
-export { default as bookService } from './api/bookService.js';
-export { default as priceDataService } from './api/priceDataService.js';
-export { default as priceAlertService } from './api/priceAlertService.js';
-export { default as userService } from './api/userService.js';
+import { userService } from './api/userService';
+import { bookService } from './api/bookService';
+import { priceAlertService } from './api/priceAlertService';
+import { priceDataService } from './api/priceDataService';
+import { authService } from './api/authService';
+
+export { userService } from './api/userService';
+export { bookService } from './api/bookService';
+export { priceAlertService } from './api/priceAlertService';
+export { priceDataService } from './api/priceDataService';
+export { authService } from './api/authService';
+
+export default {
+  userService,
+  bookService, 
+  priceAlertService,
+  priceDataService,
+  authService
+};

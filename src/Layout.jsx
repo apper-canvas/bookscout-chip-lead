@@ -1,18 +1,32 @@
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import ApperIcon from '@/components/ApperIcon';
 import { routes } from '@/config/routes';
 import SearchBar from '@/components/molecules/SearchBar';
+import { logout } from '@/store/authSlice';
+import { toast } from 'react-toastify';
 
 const Layout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const navItems = Object.values(routes).filter(route => !route.hideFromNav);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setUserMenuOpen(false);
+    toast.success('Logged out successfully');
+    navigate('/home');
   };
 
   return (
@@ -54,26 +68,75 @@ const Layout = () => {
               <SearchBar />
             </div>
 
-            {/* User Menu & Mobile Menu Button */}
+{/* User Menu & Mobile Menu Button */}
             <div className="flex items-center space-x-4">
               <div className="hidden md:flex items-center space-x-2">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors"
-                >
-                  <ApperIcon name="Bell" size={20} />
-                </motion.button>
-                
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors"
-                >
-                  <ApperIcon name="User" size={20} />
-                </motion.button>
-              </div>
+                {isAuthenticated ? (
+                  <>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="p-2 rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors"
+                    >
+                      <ApperIcon name="Bell" size={20} />
+                    </motion.button>
+                    
+                    <div className="relative">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setUserMenuOpen(!userMenuOpen)}
+                        className="flex items-center space-x-2 p-2 rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors"
+                      >
+                        <ApperIcon name="User" size={20} />
+                        <span className="text-sm font-medium">{user?.name || 'User'}</span>
+                        <ApperIcon name="ChevronDown" size={16} />
+                      </motion.button>
 
+                      <AnimatePresence>
+                        {userMenuOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="absolute right-0 mt-2 w-48 bg-surface border border-gray-200 rounded-lg shadow-lg z-50"
+                          >
+                            <div className="py-2">
+                              <button
+                                onClick={() => {
+                                  navigate('/dashboard');
+                                  setUserMenuOpen(false);
+                                }}
+                                className="flex items-center space-x-2 w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-primary/10 transition-colors"
+                              >
+                                <ApperIcon name="User" size={16} />
+                                <span>Dashboard</span>
+                              </button>
+                              <hr className="my-1 border-gray-200" />
+                              <button
+                                onClick={handleLogout}
+                                className="flex items-center space-x-2 w-full px-4 py-2 text-left text-sm text-error hover:bg-error/10 transition-colors"
+                              >
+                                <ApperIcon name="LogOut" size={16} />
+                                <span>Sign Out</span>
+                              </button>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => navigate('/login')}
+                    className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                  >
+                    Sign In
+                  </motion.button>
+                )}
+              </div>
               {/* Mobile menu button */}
               <button
                 onClick={toggleMobileMenu}
@@ -140,16 +203,47 @@ const Layout = () => {
                   ))}
                 </nav>
 
-                <div className="mt-8 pt-8 border-t border-primary/20">
+<div className="mt-8 pt-8 border-t border-primary/20">
                   <div className="space-y-4">
-                    <button className="flex items-center space-x-3 px-4 py-3 w-full text-left rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors">
-                      <ApperIcon name="Bell" size={20} />
-                      <span>Notifications</span>
-                    </button>
-                    <button className="flex items-center space-x-3 px-4 py-3 w-full text-left rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors">
-                      <ApperIcon name="User" size={20} />
-                      <span>Profile</span>
-                    </button>
+                    {isAuthenticated ? (
+                      <>
+                        <button className="flex items-center space-x-3 px-4 py-3 w-full text-left rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors">
+                          <ApperIcon name="Bell" size={20} />
+                          <span>Notifications</span>
+                        </button>
+                        <button 
+                          onClick={() => {
+                            navigate('/dashboard');
+                            setMobileMenuOpen(false);
+                          }}
+                          className="flex items-center space-x-3 px-4 py-3 w-full text-left rounded-lg text-gray-700 hover:text-primary hover:bg-primary/10 transition-colors"
+                        >
+                          <ApperIcon name="User" size={20} />
+                          <span>Dashboard</span>
+                        </button>
+                        <button 
+                          onClick={() => {
+                            handleLogout();
+                            setMobileMenuOpen(false);
+                          }}
+                          className="flex items-center space-x-3 px-4 py-3 w-full text-left rounded-lg text-error hover:bg-error/10 transition-colors"
+                        >
+                          <ApperIcon name="LogOut" size={20} />
+                          <span>Sign Out</span>
+                        </button>
+                      </>
+                    ) : (
+                      <button 
+                        onClick={() => {
+                          navigate('/login');
+                          setMobileMenuOpen(false);
+                        }}
+                        className="flex items-center space-x-3 px-4 py-3 w-full text-left rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors"
+                      >
+                        <ApperIcon name="LogIn" size={20} />
+                        <span>Sign In</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

@@ -3,6 +3,9 @@ import Discover from '@/components/pages/Discover';
 import BookDetail from '@/components/pages/BookDetail';
 import Dashboard from '@/components/pages/Dashboard';
 import NotFound from '@/components/pages/NotFound';
+import Login from '@/components/pages/Login';
+import Signup from '@/components/pages/Signup';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export const routes = {
   home: {
@@ -19,12 +22,16 @@ export const routes = {
     icon: 'Search',
     component: Discover
   },
-  dashboard: {
+dashboard: {
     id: 'dashboard',
     label: 'Dashboard',
     path: '/dashboard',
     icon: 'User',
-    component: Dashboard
+    component: () => (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    )
   },
   bookDetail: {
     id: 'bookDetail',
@@ -32,6 +39,22 @@ export const routes = {
     path: '/book/:id',
     icon: 'Book',
     component: BookDetail,
+hideFromNav: true
+  },
+  login: {
+    id: 'login',
+    label: 'Login',
+    path: '/login',
+    icon: 'LogIn',
+    component: Login,
+    hideFromNav: true
+  },
+  signup: {
+    id: 'signup',
+    label: 'Sign Up',
+    path: '/signup',
+    icon: 'UserPlus',
+    component: Signup,
     hideFromNav: true
   },
   notFound: {
